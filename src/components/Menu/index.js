@@ -3,7 +3,7 @@ import React from "react";
 import "./Menu.css";
 import Logo from "../../assets/Logo.png";
 
-import ButtonLink from "../../components/components/ButtonLink";
+import Button from "../../components/Button";
 
 const Menu = () => {
   return (
@@ -12,9 +12,9 @@ const Menu = () => {
         <img className="Logo" src={Logo} alt="logo"></img>
       </a>
 
-      <ButtonLink className="ButtonLink" href="/">
+      <Button as="a" className="ButtonLink" href="/">
         Novo Vídeo
-      </ButtonLink>
+      </Button>
     </nav>
   );
 };
