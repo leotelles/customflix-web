@@ -9,7 +9,7 @@ import Button from "../../components/Button";
 const Menu = () => {
   return (
     <nav className="Menu">
-      <Link href="/">
+      <Link to="/">
         <img className="Logo" src={Logo} alt="logo"></img>
       </Link>
 
