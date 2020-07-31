@@ -1,8 +1,9 @@
 import config from '../config';
 
-const URL_CATEGORIES = `${config.URL_BACKEND_TOP}/categorias`;
+const URL_CATEGORIES = `${config.URL_BACKEND}/categorias`;
 
 function getAll() {
+  console.log(URL_CATEGORIES);
   return fetch(`${URL_CATEGORIES}`).then(async (respostaDoServidor) => {
     if (respostaDoServidor.ok) {
       const resposta = await respostaDoServidor.json();

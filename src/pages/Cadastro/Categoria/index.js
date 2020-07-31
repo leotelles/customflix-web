@@ -4,6 +4,7 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
+import config from '../../../config';
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -17,11 +18,8 @@ function CadastroCategoria() {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
-    const URL_TOP = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/categorias'
-      : 'https://customflix-server.herokuapp.com/';
-
-    fetch(URL_TOP).then(async (respostaDoServidor) => {
+    const URL_CATEGORIES = `${config.URL_BACKEND}/categorias`;
+    fetch(URL_CATEGORIES).then(async (respostaDoServidor) => {
       const resposta = await respostaDoServidor.json();
       setCategorias([...resposta]);
     });
