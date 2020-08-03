@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
@@ -7,8 +7,10 @@ import useForm from '../../../hooks/useForm';
 import api from '../../../config';
 
 function CadastroCategoria() {
+  const history = useHistory();
+
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '',
   };
@@ -28,7 +30,7 @@ function CadastroCategoria() {
     <PageDefault>
       <h1>
         Cadastro de Categoria:
-        {values.nome}
+        {values.titulo}
       </h1>
 
       <form
@@ -36,13 +38,22 @@ function CadastroCategoria() {
           infosDoEvento.preventDefault();
           setCategorias([...categorias, values]);
 
+          api
+            .post('categorias', {
+              titulo: values.titulo,
+              cor: values.cor,
+            })
+            .then((response) => {
+              history.push('/');
+            });
+
           clearForm();
         }}
       >
         <FormField
-          label="Nome da Categoria"
-          name="nome"
-          value={values.nome}
+          label="Título da Categoria"
+          name="titulo"
+          value={values.titulo}
           onChange={handleChange}
         />
 
