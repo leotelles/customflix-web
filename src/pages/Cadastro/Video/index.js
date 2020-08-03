@@ -70,7 +70,9 @@ function CadastroVideo() {
           suggestions={categoryTitles}
         />
 
-        <Button type="submit">Cadastrar</Button>
+        <Button type="submit" style={{ backgroundColor: '#000000' }}>
+          Cadastrar
+        </Button>
       </form>
 
       <br />
