@@ -73,7 +73,7 @@ function CadastroCategoria() {
           onChange={handleChange}
         />
 
-        <Button>Cadastrar</Button>
+        <Button style={{ backgroundColor: '#000000' }}>Cadastrar</Button>
       </form>
 
       {categorias.length === 0 && <div>Loading...</div>}
