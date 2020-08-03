@@ -4,7 +4,7 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
-import config from '../../../config';
+import api from '../../../config';
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -18,10 +18,9 @@ function CadastroCategoria() {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
-    const URL_CATEGORIES = `${config.URL_BACKEND}/categorias`;
-    fetch(URL_CATEGORIES).then(async (respostaDoServidor) => {
-      const resposta = await respostaDoServidor.json();
-      setCategorias([...resposta]);
+    api.get('categorias').then(async (res) => {
+      const response = await res.data;
+      setCategorias([...response]);
     });
   }, []);
 

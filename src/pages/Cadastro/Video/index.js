@@ -4,8 +4,8 @@ import PageDefault from '../../../components/PageDefault';
 import useForm from '../../../hooks/useForm';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
-import videosRepository from '../../../repositories/videos';
-import categoriasRepository from '../../../repositories/categorias';
+
+import api from '../../../config';
 
 function CadastroVideo() {
   const history = useHistory();
@@ -18,8 +18,9 @@ function CadastroVideo() {
   });
 
   useEffect(() => {
-    categoriasRepository.getAll().then((categoriasFromServer) => {
-      setCategorias(categoriasFromServer);
+    api.get('categorias').then(async (res) => {
+      const response = await res.data;
+      setCategorias([...response]);
     });
   }, []);
 
@@ -35,13 +36,13 @@ function CadastroVideo() {
             return categoria.titulo === values.categoria;
           });
 
-          videosRepository
-            .create({
+          api
+            .post('videos?_embed=videos', {
               titulo: values.titulo,
               url: values.url,
               categoriaId: categoriaEscolhida.id,
             })
-            .then(() => {
+            .then((response) => {
               console.log('Cadastrou com sucesso!');
               history.push('/');
             });

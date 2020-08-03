@@ -2,21 +2,17 @@ import React, { useEffect, useState } from 'react';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
 import PageDefault from '../../components/PageDefault';
-import categoriasRepository from '../../repositories/categorias';
+
+import api from '../../config';
 
 function Home() {
   const [dadosIniciais, setDadosIniciais] = useState([]);
 
   useEffect(() => {
-    categoriasRepository
-      .getAllWithVideos()
-      .then((categoriasComVideos) => {
-        console.log(categoriasComVideos[0].videos[0]);
-        setDadosIniciais(categoriasComVideos);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    api.get('categorias?_embed=videos').then(async (res) => {
+      const response = await res.data;
+      setDadosIniciais([...response]);
+    });
   }, []);
 
   return (
